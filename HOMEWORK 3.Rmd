@@ -1,0 +1,71 @@
+HOMEWORK 3
+
+LEER UN ARCHIVO CSV DESDE R
+
+Para leer un archivo CSV en R, se puede utilizar la función read.csv(). Hay que asegurarse de colocar la ruta de archivo para leer el archivo CSV.
+
+```{r}
+data <- read.csv("archivo.csv")
+```
+
+
+FUNCIÓN SELECT() DE LA PAQUETERÍA DE DPLYR
+
+La función select() es parte de la paquetería "dplyr" en R y se ut para seleccionar columnas específicas de un data frame. Proporciona una forma concisa y fácil de especificar las columnas que se desea mantener en el conjunto de datos y descartar el resto.
+
+EJERCICIO
+
+```{r}
+
+dataset_result <- read.csv("C:/Users/Asus VivoBook/Desktop/primary_results.csv")
+library(dplyr)
+
+print(dataset_result)
+str(dataset_result)
+
+library(tidyr)
+
+1.
+
+dataset_result %>%
+ filter(state == "Florida")
+
+2.
+
+2.1
+
+dataset_result %>%
+ filter(state == "Florida", candidate == "Hillary Clinton" | candidate == "Donald Trump" )
+
+2.2
+
+dataset_result %>%
+ filter(party == "Democrat", county == "Shelby" )
+
+2.3
+
+dataset_result %>%
+ filter(state == "Alabama", votes >= 1500 )
+
+3.
+
+3.1
+
+dataset_result %>%
+ filter(state == "Texas", county == "Shelby" )%>%
+  
+  select(party, candidate, votes)%>%
+  arrange(desc(votes))
+
+4.
+
+4.1
+
+dataset_result %>%
+ filter(party == "Republican", candidate == "Ted Cruz", state == "Alaska" ) %>%
+  
+  mutate(vote_count = votes/fraction_votes)%>%
+  arrange(desc(vote_count))
+
+```
+
