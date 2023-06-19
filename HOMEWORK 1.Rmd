@@ -1,0 +1,22 @@
+
+HOMEWORK 1
+
+```{r}
+
+pesos <- matrix(runif(25, 160, 200), nrow = 5, ncol = 5)
+
+colnames_pesos <- c("enero", "febrero", "marzo", "abril", "mayo") 
+rownames_pesos <- c("Juan", "María", "Pedro", "Laura", "José")
+
+peso_promedio_persona <- apply(pesos, 1, mean)
+peso_promedio_mes <- colmeans(pesos)
+
+pesos_promedios <- rbind(pesos, peso_promedio_mes)
+pesos_promedios <- cbind(pesos_promedios, pesos_promedio_persona)
+
+print(pesos_promedios)
+
+
+
+```
+
