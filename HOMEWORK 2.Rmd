@@ -1,0 +1,176 @@
+
+HOMEWORK 2
+
+
+FUNCIONES EN R
+
+
+ESTRUCTURA DE UNA FUNCIÓN
+
+Nombre de la función: Es el nombre que se le da a una función.
+
+Argumento 1 y Argumento 2: Son los argumentos que puedes pasarle a la función. Son valores o variables que la función utilizará para realizar sus operaciones.
+
+El cuerpo de la función: Es el bloque de código que se ejecuta cuando la función es llamada. Aquí se debe escribir las operaciones y lógica de la función.
+
+Resultado: Es la variable que contiene el resultado de la función. Puede devolver cualquier tipo de dato como resultado.
+
+Return: Se utiliza para devolver el resultado de la función. Cuando se encuentra return, la función finaliza y devuelve el valor especificado.
+
+```{r}
+nombre_de_la_funcion <- function(argumento1, argumento2, ...) {
+  # Cuerpo de la función
+  # Aquí se incluye el código que realiza las operaciones de la función
+  # Puede haber variables locales definidas dentro de la función
+  
+  return(resultado)  # Devuelve el resultado de la función
+}
+```
+
+
+EJEMPLO DE FUNCIÓN
+
+```{r}
+sumar <- function(a, b) {
+  resultado <- a + b
+  return(resultado)
+}
+
+resultado <- sumar(2, 3)
+print(resultado)  # Imprime el resultado, en este caso, 5
+```
+
+
+ARGUMENTOS DE UNA FUNCIÓN
+
+Los argumentos de una función en R son los calores o variables que se pasan a la función para que los utilice en sus operarios. Los argumentos permiten perzonalizar el comportamiento de la función y proporcionar datos específicos para su procesamiento.
+
+En la definición de una función en R, los argumentos se especifícan dentro de los paréntesis después del nombre de la función. Puedes tener cero o más argumentos, separados por comas.
+
+```{r}
+mi_funcion <- function(arg1, arg2, arg3) {
+  # Cuerpo de la función
+  # Utiliza los argumentos en las operaciones de la función
+}
+```
+
+ARGUMENTOS POR VALOR
+
+Los argumentos de una función se pasan por valor de forma predeterminada. Esto significa que cuando se llama a una función y se pasa un argumento, se crea una copia del valor del argumento y se utiliza ese copia dentro de la función.
+
+Cuando se realiza uan operación o se modifica el valor de un argumento dentro de la función, no afecta al valor original de la variable fuera de la función. Esto se debe a que se está trabajando con una copia de valor y no con la variable original.
+
+```{r}
+duplicar <- function(x) {
+  x <- x * 2  # Se modifica el valor de x dentro de la función
+  print(x)
+}
+
+numero <- 5
+duplicar(numero)
+print(numero)  # El valor original de numero no se modifica
+```
+
+
+FAMILIA APPLY
+
+
+LAPPY
+
+Lappy es una función en R que permite aplicar una función a cada elemento de una lista o vector y devuelve una nueva lista con los resultados. La función lapply es parte de un conjunto de funciones llamdas "apply family" en R, que son putiles para aplicar operaciones a través de una lista, matriz o vector de manera eficiente.
+
+La sintaxis de lapply es la siguiente:
+
+X: Es la lista, vector o objeto sobre el cual se aplicará la función.
+FUN: Es la función que se aplicará a cada elemento de "x".
+...: Son argumentos opcionales que se peden pasar a la función "FUN".
+
+
+```{r}
+lapply(X, FUN, ...)
+```
+
+La función lapply recorre cada elemento de "X" y aplica la función "FUN" a cada uno de ellos, devolviendo una lista con los resultados correspondientes. Los resultados se combinan en una lista en el mismo orden que aparecen en "X".
+
+
+EJEMPLO DE USO DE LAPPLY CON FUNCIONES
+
+```{r}
+numeros <- list(1, 2, 3, 4, 5)
+
+cuadrado <- function(x) {
+  return(x^2)
+}
+
+resultados <- lapply(numeros, cuadrado)
+
+print(resultados)
+```
+
+
+SAPPLY
+
+Es una función que pertenece a la familia "apply" y se utiliza para aplicar una función a cada elemento de una lista o vector y simplificar los resultados en una estructura de datos más simple, como un vector o una matriz. La función "sapply" es una versión simplificada de "lapply", ya que intenta simplificar automáticamente los resultados en una estructura de datos adecuada.
+
+La sintaxis de sapply es la siguiente:
+
+X: Es la lista, vector o objeto sobre el cual se aplicará la función.
+FUN: Es la función que se aplicará a cada elemento de "x".
+...: Son argumentos opcionales que se peden pasar a la función "FUN".
+
+```{r}
+sapply(X, FUN, ...)
+```
+
+
+La función "sapply" recorre cada elemento de "X" y aplica la función "FUN" a cada uno de ellos. A diferencia de "lapply", "sapply" intenta simplificar automáticamente los resultados en una estrcutura de datos más simple. Por ejemplo, si todos los resultados son escalares, "sapply" devolverá un vector. Si los resultados tienen diferentes lonitudes, "sapply" devolverá una matriz con la estructura adecuada.
+
+
+EJEMPLO DE USO DE SAPPLY CON FUNCIONES
+
+```{r}
+numeros <- list(1, 2, 3, 4, 5)
+
+cuadrado <- function(x) {
+  return(x^2)
+}
+
+resultados <- sapply(numeros, cuadrado)
+
+print(resultados)
+```
+
+
+VAPPLY
+
+Es una función que se utiliza para aplicar una función a cada elemento de un vector o lista y especificar el tipo de datos de retorno de manera explícita. A diferencia de "sapply" y "lapply", "vapply" proporciona un mayor control sobre el tipo de salida que se espera de la función aplicada.
+
+La sintaxis de vapply es la siguiente:
+
+X: Es el vector o lista sobre el cual se aplicará la función.
+FUN: Es la función que se aplicará a cada elemento de "x".
+FUN.VALUE: Es el tipo de datos de retorno esperado.
+...: Son argumentos opcionales que se peden pasar a la función "FUN".
+
+```{r}
+vapply(X, FUN, FUN.VALUE, ...)
+```
+
+La función "vapply" recorre cada elemto de "X" y aplica "FUN" a cada uno de ellos. A difrencia de "sapply", "vapply" requiere que se especifique el tipo de datos de retorno esperado mediante el argumento "FUN.VALUE". Esto permite tener un mayor control sobre la estrucutra y el tipo de datos de salida.
+
+
+EJEMPLO DE USO DE VAPPLY CON FUNCIONES
+
+```{r}
+numeros <- c(1, 2, 3, 4, 5)
+
+cuadrado <- function(x) {
+  return(x^2)
+}
+
+resultados <- vapply(numeros, cuadrado, FUN.VALUE = numeric(1))
+
+print(resultados)
+```
+
+
