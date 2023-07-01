@@ -1,0 +1,124 @@
+
+
+```{r}
+
+library(ggplot2)
+library(dplyr)
+
+diamonds <- read.csv("diamonds.csv")
+
+str(diamonds)
+
+
+# 1 Dispersión
+
+# 1.1
+
+dispersion <- ggplot(data = diamonds, aes(x = carat, y = price)) +
+  geom_point()
+
+print(dispersion)
+
+# 1.2
+
+dispersion_color <- ggplot(data = diamonds, aes(x = carat, y = price, color = clarity)) +
+  geom_point()
+
+print(dispersion_color)
+
+# 2 Histograma
+
+# 2.1
+
+histograma <- ggplot(data = diamonds, aes(x = price)) +
+  geom_histogram(bins = 40)
+print(histograma)
+
+# 2.2
+
+histograma_escala <- ggplot(data = diamonds, aes(x = price)) +
+  geom_histogram(bins = 40) +
+  scale_y_log10()
+
+print(histograma_escala)
+
+# 3 Boxplots
+
+# 3.1
+
+boxplot <- ggplot(data = diamonds, aes(x = cut, y = price)) +
+  geom_boxplot() +
+  scale_y_log10()
+
+print(boxplot)
+
+# 3.2
+
+boxplot_color <- ggplot(data = diamonds, aes(x = cut, y = price, fill = cut)) +
+  geom_boxplot() +
+  scale_y_log10()
+
+print(boxplot_color)
+
+# 4 Faceting
+
+# 4.1
+
+filtered_price <- diamonds %>%
+  filter(price > 1000 & cut %in% c("Good", "Ideal", "Premium"))
+
+# 4.2
+
+barras <- ggplot(data = filtered_price, aes(x = cut, y = depth)) +
+  geom_bar(stat = "identity")
+
+print(barras)
+
+# 4.3
+
+faceting <- ggplot(data = filtered_price, aes(x = cut, y = depth)) +
+  geom_bar(stat = "identity") +
+  facet_wrap(~ clarity)
+
+print(faceting)
+
+# 4.4
+
+faceting_color <- ggplot(data = filtered_price, aes(x = cut, y = depth, fill = clarity)) +
+  geom_bar(stat = "identity") +
+  facet_wrap(~ clarity)
+
+print(faceting_color)
+
+# Grouping and summarizing
+
+# 1
+
+median_dimension_diamond <- diamonds %>%
+  group_by(cut) %>%
+  summarize(mediaX = mean(x), mediaY = mean(y), mediaZ = mean(z))
+
+print(median_dimension_diamond)
+
+# 2
+
+cut_premium <- diamonds %>%
+  filter(cut == "Premium") %>%
+  group_by(clarity) %>%
+  summarize(minPrice = min(price), maxPrice = max(price))
+
+print(cut_premium)
+
+# 3
+
+barras_cut_premium <- ggplot(data = cut_premium, aes(x = clarity, y = maxPrice, fill = clarity)) +
+  geom_bar(stat = "identity") +
+  xlab("Clarity") +
+  ylab("Max Price")
+
+print(barras_cut_premium)
+
+
+
+```
+
