@@ -59,7 +59,36 @@ united <- inner_join(questions, answers, by = c("id" = "question_id"), suffix = 
 united_2 <- united %>%
   mutate(gap = creation_date_answer - creation_date_question)
 
+#4 Joining question and answer counts
 
+# 4.1
+
+answer_counts <- answers %>%
+  count(question_id) %>%
+  arrange(question_id)
+
+# 4.2
+
+questions_answer_counts <- left_join(questions, answer_counts, by = c("id" = "question_id"))
+
+# 4.3
+
+questions_answer_counts <- questions_answer_counts %>%
+  mutate(n = replace_na(n, 0))
+
+# 4.4
+
+question_answer_counts <- questions_answer_counts
+
+#5 Joining questions, answers, and tags
+
+# 5.1
+
+combined <- inner_join(question_tags, question_answer_counts, by = "question_id")
+
+# 5.2
+
+combined <- inner_join(combined, tags, by = "tag_id")
 
 
 ```
