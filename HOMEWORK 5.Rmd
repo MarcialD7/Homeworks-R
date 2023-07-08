@@ -13,7 +13,7 @@ answers <- read.csv('answers.csv')
 tags <- read.csv('tags.csv')
 question_tags <- read.csv('question_tags.csv')
 
-#1
+#1 Left-joining questions and tags
 
 #1.1
 
@@ -31,7 +31,7 @@ questions_tags_2 <- questions_tags %>% mutate(tag_name = replace_na(tag_name, "o
 
 questions_with_tags <- questions_tags_2
 
-#2
+#2 Comparing scores across tags
 
 #2.1
 
@@ -48,7 +48,7 @@ scores <- grouped %>%
 scores_orden <- tag_scores %>%
   arrange(desc(mean_score))
 
-#3
+#3 Finding gaps between questions and answers
 
 #3.1
 
